@@ -1,0 +1,419 @@
+/* ================================
+   SLG 每日资讯 - 样式表
+   暗色主题 + 游戏感金色点缀
+   ================================ */
+
+/* 基础重置 */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* CSS 变量：颜色与尺寸 */
+:root {
+    /* 暗色主题主色 */
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --bg-tertiary: #0f1729;
+    --bg-hover: #1e2a4a;
+
+    /* 文字颜色 */
+    --text-primary: #e8e8f0;
+    --text-secondary: #a0a8c0;
+    --text-muted: #6c7593;
+
+    /* 主色调：金色/琥珀色 */
+    --accent: #f5a623;
+    --accent-hover: #ffb84d;
+    --accent-soft: rgba(245, 166, 35, 0.15);
+
+    /* 边框 */
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.16);
+
+    /* 来源标签颜色 */
+    --src-gameres: #3b82f6;   /* 蓝 */
+    --src-taptap:  #10b981;   /* 绿 */
+    --src-nga:     #f97316;   /* 橙 */
+    --src-putao:   #a855f7;   /* 紫 */
+    --src-google:  #ef4444;   /* 红 */
+    --src-default: #64748b;   /* 灰 */
+
+    /* 尺寸 */
+    --sidebar-width: 240px;
+    --content-max: 920px;
+    --radius: 10px;
+    --radius-sm: 6px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Microsoft YaHei", "Hiragino Sans GB", "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ================================
+   页面头部
+   ================================ */
+.site-header {
+    background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-primary) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 24px 24px;
+}
+
+.header-inner {
+    max-width: calc(var(--sidebar-width) + var(--content-max) + 48px);
+    margin: 0 auto;
+}
+
+.site-title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.5px;
+}
+
+.site-title::before {
+    content: "▸ ";
+    color: var(--accent);
+}
+
+.site-subtitle {
+    margin: 6px 0 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.current-date {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+/* ================================
+   移动端日期选择器（默认隐藏）
+   ================================ */
+.date-picker-mobile {
+    display: none;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 12px 16px;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+}
+
+.date-picker-mobile::-webkit-scrollbar {
+    height: 4px;
+}
+
+.date-picker-mobile::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 2px;
+}
+
+.date-pill {
+    display: inline-block;
+    padding: 6px 14px;
+    margin-right: 8px;
+    border-radius: 999px;
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.date-pill:hover {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+}
+
+.date-pill.active {
+    background-color: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+/* ================================
+   主体布局
+   ================================ */
+.layout {
+    display: flex;
+    gap: 24px;
+    max-width: calc(var(--sidebar-width) + var(--content-max) + 48px);
+    margin: 0 auto;
+    padding: 24px;
+}
+
+/* 左侧栏 */
+.sidebar {
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+}
+
+.sidebar-title {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.date-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.date-list li {
+    padding: 10px 14px;
+    margin-bottom: 4px;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border-left: 2px solid transparent;
+}
+
+.date-list li:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.date-list li.active {
+    background-color: var(--accent-soft);
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 500;
+}
+
+/* 右侧主内容区 */
+.content {
+    flex: 1;
+    min-width: 0;
+}
+
+.state-message {
+    padding: 48px 24px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.state-message.error {
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.state-message.hidden {
+    display: none;
+}
+
+.card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ================================
+   卡片
+   ================================ */
+.card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    transition: all 0.2s ease;
+}
+
+.card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    margin: 0 0 8px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.4;
+    width: 100%;
+}
+
+.card-title a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.card-title a:hover {
+    color: var(--accent);
+}
+
+.card-title a::after {
+    content: " ↗";
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: normal;
+}
+
+/* 来源标签 */
+.source-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: var(--src-default);
+}
+
+.source-tag[data-source="GameRes"]   { background-color: var(--src-gameres); }
+.source-tag[data-source="TapTap"]    { background-color: var(--src-taptap); }
+.source-tag[data-source="NGA"]       { background-color: var(--src-nga); }
+.source-tag[data-source="游戏葡萄"]  { background-color: var(--src-putao); }
+.source-tag[data-source="Google"]    { background-color: var(--src-google); }
+
+/* 时间 */
+.card-time {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* 摘要 */
+.card-summary {
+    margin: 8px 0 12px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* 评分指示器 */
+.card-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.rating-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rating-bar {
+    flex: 1;
+    max-width: 120px;
+    height: 6px;
+    background-color: var(--bg-tertiary);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.rating-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-hover) 100%);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.rating-score {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+    min-width: 32px;
+    text-align: right;
+}
+
+/* ================================
+   页脚
+   ================================ */
+.site-footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+/* ================================
+   响应式：移动端 (< 768px)
+   ================================ */
+@media (max-width: 768px) {
+    .site-header {
+        padding: 20px 16px 16px;
+    }
+
+    .site-title {
+        font-size: 22px;
+    }
+
+    .site-subtitle {
+        font-size: 13px;
+    }
+
+    /* 显示移动端日期选择器 */
+    .date-picker-mobile {
+        display: block;
+    }
+
+    /* 隐藏左侧栏 */
+    .sidebar {
+        display: none;
+    }
+
+    .layout {
+        padding: 16px;
+        gap: 0;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .card-title {
+        font-size: 16px;
+    }
+}

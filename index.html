@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="每日精选 3~5 条 SLG 品类热门资讯">
+    <title>SLG 每日资讯</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 页面头部 -->
+    <header class="site-header">
+        <div class="header-inner">
+            <h1 class="site-title">SLG 每日资讯</h1>
+            <p class="site-subtitle">每日精选 3~5 条 SLG 品类热门资讯</p>
+            <div class="current-date" id="currentDate">--</div>
+        </div>
+    </header>
+
+    <!-- 移动端日期选择器（水平滚动） -->
+    <nav class="date-picker-mobile" id="datePickerMobile" aria-label="日期选择器">
+        <!-- 由 main.js 动态填充 -->
+    </nav>
+
+    <!-- 主体布局 -->
+    <main class="layout">
+        <!-- 左侧历史日期列表（桌面端） -->
+        <aside class="sidebar" id="sidebar" aria-label="历史日期">
+            <h2 class="sidebar-title">历史日期</h2>
+            <ul class="date-list" id="dateList">
+                <!-- 由 main.js 动态填充 -->
+            </ul>
+        </aside>
+
+        <!-- 右侧主内容区 -->
+        <section class="content" id="content">
+            <div class="state-message" id="stateMessage">正在加载…</div>
+            <div class="card-list" id="cardList"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© SLG 每日资讯 · 静态站点</p>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
