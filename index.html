@@ -11,9 +11,16 @@
     <!-- 页面头部 -->
     <header class="site-header">
         <div class="header-inner">
-            <h1 class="site-title">SLG 每日资讯</h1>
+            <div class="header-top">
+                <h1 class="site-title">SLG 每日资讯</h1>
+                <button class="refresh-btn" id="refreshBtn" title="手动触发今日数据抓取">
+                    <span class="refresh-btn-icon">↻</span>
+                    <span class="refresh-btn-text" id="refreshBtnText">今日刷新</span>
+                </button>
+            </div>
             <p class="site-subtitle">每日精选 3~5 条 SLG 品类热门资讯</p>
             <div class="current-date" id="currentDate">--</div>
+            <div class="refresh-status hidden" id="refreshStatus"></div>
         </div>
     </header>
 

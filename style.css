@@ -77,6 +77,82 @@ body {
     margin: 0 auto;
 }
 
+.header-top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* ================================
+   今日刷新按钮
+   ================================ */
+.refresh-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.refresh-btn:hover:not(:disabled) {
+    background-color: var(--accent);
+    color: var(--bg-primary);
+}
+
+.refresh-btn:active:not(:disabled) {
+    transform: scale(0.96);
+}
+
+.refresh-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.refresh-btn.loading .refresh-btn-icon {
+    animation: spin 1s linear infinite;
+}
+
+.refresh-btn.counting {
+    border-color: var(--text-muted);
+    color: var(--text-secondary);
+}
+
+.refresh-btn-icon {
+    font-size: 16px;
+    line-height: 1;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 刷新状态提示 */
+.refresh-status {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.refresh-status.error {
+    color: #ef4444;
+}
+
+.refresh-status.hidden {
+    display: none;
+}
+
 .site-title {
     margin: 0;
     font-size: 28px;
