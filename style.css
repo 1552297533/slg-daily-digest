@@ -323,12 +323,56 @@ body {
     border-radius: var(--radius);
     padding: 20px 22px;
     transition: all 0.2s ease;
+    border-left: 3px solid var(--accent);
+    position: relative;
+}
+
+/* 未读标记小圆点 */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: -12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+    transition: opacity 0.3s ease;
+}
+
+/* 已读卡片 */
+.card.is-read {
+    border-left-color: var(--border);
+    opacity: 0.65;
+}
+
+.card.is-read::before {
+    opacity: 0;
+}
+
+.card.is-read .card-title a {
+    color: var(--text-muted);
+}
+
+.card.is-read .card-title a::after {
+    content: " ✓";
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.card.is-read:hover {
+    opacity: 0.8;
 }
 
 .card:hover {
     border-color: var(--border-strong);
     transform: translateY(-1px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card:not(.is-read):hover {
+    border-left-color: var(--accent-hover);
 }
 
 .card-header {

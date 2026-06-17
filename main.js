@@ -21,6 +21,56 @@
     let dateIndex = [];
 
     // ============================================
+    // 已读状态管理
+    // ============================================
+    const READ_STORAGE_KEY = 'slg-digest-read-urls';
+
+    /** 获取已读 URL 集合 */
+    function getReadUrls() {
+        try {
+            const raw = localStorage.getItem(READ_STORAGE_KEY);
+            return raw ? new Set(JSON.parse(raw)) : new Set();
+        } catch (e) {
+            return new Set();
+        }
+    }
+
+    /** 标记 URL 为已读 */
+    function markUrlAsRead(url) {
+        if (!url || url === '#') return;
+        const readSet = getReadUrls();
+        if (readSet.has(url)) return; // 已存在，无需重复写入
+        readSet.add(url);
+        try {
+            localStorage.setItem(READ_STORAGE_KEY, JSON.stringify([...readSet]));
+        } catch (e) { /* localStorage 满或不可用 */ }
+    }
+
+    /** 检查 URL 是否已读 */
+    function isUrlRead(url) {
+        return getReadUrls().has(url);
+    }
+
+    /** 将页面上所有匹配 URL 的卡片标记为已读样式 */
+    function applyReadStyleByUrl(url) {
+        document.querySelectorAll('.card[data-url]').forEach((card) => {
+            if (card.dataset.url === url) {
+                card.classList.add('is-read');
+            }
+        });
+    }
+
+    /** 初始化所有卡片的已读状态 */
+    function initReadStates() {
+        const readSet = getReadUrls();
+        document.querySelectorAll('.card[data-url]').forEach((card) => {
+            if (readSet.has(card.dataset.url)) {
+                card.classList.add('is-read');
+            }
+        });
+    }
+
+    // ============================================
     // 工具函数
     // ============================================
 
@@ -182,7 +232,20 @@
 
             card.innerHTML = html;
             $cardList.appendChild(card);
+
+            // 绑定链接点击事件：标记已读
+            const link = card.querySelector('.card-title a');
+            if (link && url !== '#') {
+                card.dataset.url = url;
+                link.addEventListener('click', () => {
+                    markUrlAsRead(url);
+                    applyReadStyleByUrl(url);
+                });
+            }
         });
+
+        // 渲染完成后应用已读状态
+        initReadStates();
     }
 
     // ============================================
